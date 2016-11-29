@@ -85,6 +85,8 @@ namespace test.Models
         public string LastName { get; set; }
         [Required]
         public int CountryId { get; set; }
+        
+        public string ImgPath { get; set; }
 
     }
 
@@ -96,6 +98,8 @@ namespace test.Models
         public string LastName { get; set; }
         [Required]
         public int CountryId { get; set; }
+        public string ImgPath { get; set; }
+
     }
 
     public class ResetPasswordViewModel

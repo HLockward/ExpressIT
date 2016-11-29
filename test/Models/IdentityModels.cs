@@ -13,7 +13,7 @@ namespace test.Models
         public string LastName { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }
-
+        public string ImgPath { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

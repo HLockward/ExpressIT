@@ -12,6 +12,7 @@ using test.Models;
 using test.DataContexts;
 using System.Net;
 using System.Data.Entity;
+using System.IO;
 
 namespace test.Controllers
 {
@@ -152,28 +153,34 @@ namespace test.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase photo)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                user.Name = model.Name;
-                user.LastName = model.LastName;
-                user.CountryId = model.CountryId;
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                model.ImgPath = SaveImage(photo,model.Email);
+                if(model.ImgPath != "")
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // Para obtener más información sobre cómo habilitar la confirmación de cuenta y el restablecimiento de contraseña, visite http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Enviar correo electrónico con este vínculo
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    user.Name = model.Name;
+                    user.LastName = model.LastName;
+                    user.CountryId = model.CountryId;
+                    user.ImgPath = model.ImgPath;
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+                        // Para obtener más información sobre cómo habilitar la confirmación de cuenta y el restablecimiento de contraseña, visite http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Enviar correo electrónico con este vínculo
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
@@ -186,14 +193,16 @@ namespace test.Controllers
         {
             
             var user = UserManager.FindById(User.Identity.GetUserId());
-            EditUserViewModel EditUser = new EditUserViewModel();
-            EditUser.Name = user.Name;
-            EditUser.LastName = user.LastName;
-            EditUser.CountryId = user.CountryId;
             if (user == null)
             {
                 return HttpNotFound();
             }
+            EditUserViewModel EditUser = new EditUserViewModel();
+            EditUser.Name = user.Name;
+            EditUser.LastName = user.LastName;
+            EditUser.CountryId = user.CountryId;
+            EditUser.ImgPath = user.ImgPath;
+            
             ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "name",user.CountryId);
             return View(EditUser);
         }
@@ -201,29 +210,66 @@ namespace test.Controllers
         // POST: Account/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Name,LastName,CountryId")] EditUserViewModel user)
+        public ActionResult Edit([Bind(Include = "Name,LastName,CountryId")] EditUserViewModel user, HttpPostedFileBase photo)
         {
             ApplicationUser model = UserManager.FindById(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
-                model.Name = user.Name;
-                model.LastName = user.LastName;
-                model.CountryId = user.CountryId;
+                model.ImgPath = SaveImage(photo, model.Email);
+                if (model.ImgPath != "")
+                {
+                    model.Name = user.Name;
+                    model.LastName = user.LastName;
+                    model.CountryId = user.CountryId;
 
-                IdentityResult result = this.UserManager.Update(model);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Edit");
-                }else
-                {
-                    ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "name");
-                    return View("Edit", user);
+                    IdentityResult result = this.UserManager.Update(model);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Edit");
+                    }
+                    else
+                    {
+                        ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "name");
+                        return View("Edit", user);
+                    }
                 }
                 
             }
             ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "name");
             return View("Edit",user);
         }
+
+        // save image file and return the URL of the location in the server
+        [HttpPost]
+        public string SaveImage(HttpPostedFileBase file,string userName)
+        {
+            string cleamUserName = userName.Replace("@", "").Replace(".", "");
+            string folderPath = Server.MapPath("~/img/")+cleamUserName;
+            if (!Directory.Exists(folderPath))
+            {
+                //If Directory (Folder) does not exists. Create it.
+                Directory.CreateDirectory(folderPath);
+            }
+            string imgPath = "";
+            if (file != null && file.ContentLength > 0)
+                try
+                {
+                   
+                    string path = folderPath +"/"+ Path.GetFileName(file.FileName);
+                    file.SaveAs(path);
+                    imgPath = cleamUserName + "/" + Path.GetFileName(file.FileName);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            else
+            {
+               
+            }
+            return imgPath;
+        }
+
 
         //
         // GET: /Account/ConfirmEmail

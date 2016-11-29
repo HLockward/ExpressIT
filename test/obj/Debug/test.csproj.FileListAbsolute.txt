@@ -89,3 +89,4 @@ C:\Users\HLockward\documents\visual studio 2015\Projects\test\test\obj\Debug\tes
 C:\Users\HLockward\documents\visual studio 2015\Projects\test\test\obj\Debug\test.Migrations.UpdateEntity.resources
 C:\Users\HLockward\documents\visual studio 2015\Projects\test\test\obj\Debug\test.csproj.GenerateResource.Cache
 C:\Users\HLockward\Documents\Visual Studio 2015\Projects\test\test\obj\Debug\test.Migrations.UpdateEntity1.resources
+C:\Users\HLockward\documents\visual studio 2015\Projects\test\test\obj\Debug\test.Migrations.UpdateEntity2.resources
