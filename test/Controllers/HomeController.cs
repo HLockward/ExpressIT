@@ -26,5 +26,16 @@ namespace test.Controllers
 
             return View();
         }
+        public ActionResult Page()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public new ActionResult Profile()
+        {
+            return View();
+        }
     }
 }
