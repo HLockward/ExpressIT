@@ -1,0 +1,3 @@
+﻿$(function () {
+    $("#photo").imgRender("renderTarget");
+});
