@@ -5,12 +5,12 @@
 }
 
 
-<div class="pagePartDown">
+<div class="onlyPagePart">
     <div class="col-sm-4"></div>
-    <div class="card col-md-4">
+    <div class="card col-sm-4">
         <h2>@ViewBag.Title.</h2>
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in.</h4>

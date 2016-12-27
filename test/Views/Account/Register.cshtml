@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Register";
 }
-    <div class="onlyPagePart pure-content">
+    <div class="row">
         <div class="col-sm-4"></div>
         <div class="card col-sm-4">
             <h2>@ViewBag.Title.</h2>
@@ -14,49 +14,52 @@
                 @Html.AntiForgeryToken()
                 <h4>Create a new account.</h4>
                 <hr />
-                <img class="renderTarget" src="~/img/anonymous.jpg" width="300" />
+                
                 @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group col-sm-12" style="margin-left:10%">
+                     <img class="renderTarget" src="~/img/anonymous.jpg" width="70%"/>
+                </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.ImgPath, "Fotos", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-9">
-                        <input type="file" name="photo" id="photo" />
+                    @Html.LabelFor(m => m.ImgPath, "Foto", new { @class = "col-md-2 control-label sr-only" })
+                    <div>
+                        <input type="file" name="photo" id="photo"/>
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label sr-only" })
-                    <div class="col-md-9">
+                    <div>
                         @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", placeholder = "Email" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label sr-only" })
-                    <div class="col-md-9">
+                    <div>
                         @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "form-control", placeholder = "Password" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label sr-only" })
-                    <div class="col-md-9">
+                    <div>
                         @Html.PasswordFor(m => m.ConfirmPassword, htmlAttributes: new { @class = "form-control", placeholder = "Confirm Password" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2 sr-only" })
-                    <div class="col-md-9">
+                    <div>
                         @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Name" } })
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "test-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.LastName, htmlAttributes: new { @class = "control-label col-md-2 sr-only" })
-                    <div class="col-md-9">
+                    <div>
                         @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "LastName" } })
                         @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "test-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.CountryId, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-9">
+                    @Html.LabelFor(m => m.CountryId, "Country", htmlAttributes: new { @class = "control-label col-md-2 sr-only" })
+                    <div>
                         @Html.DropDownList("CountryId", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger" })
                     </div>
