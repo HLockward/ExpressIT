@@ -1,6 +1,6 @@
 ﻿$.fn.imgRender = function (target) {
 
-   
+
     $(this).change(function () {
         var allowedFiles = [".png", ".jpg"];
         var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
