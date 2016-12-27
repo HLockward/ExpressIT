@@ -181,3 +181,4 @@ C:\Users\Mabel\Source\Repos\ExpressIT2\test\obj\Debug\test.Migrations.UpdateEnti
 C:\Users\Mabel\Source\Repos\ExpressIT2\test\obj\Debug\test.csproj.GenerateResource.Cache
 C:\Users\Mabel\Source\Repos\ExpressIT2\test\obj\Debug\test.dll
 C:\Users\Mabel\Source\Repos\ExpressIT2\test\obj\Debug\test.pdb
+C:\Users\Mabel\Source\Repos\ExpressIT2\test\obj\Debug\test.csprojResolveAssemblyReference.cache

@@ -11,6 +11,8 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>test.DataContexts.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
+    <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
+    <IISExpressSSLPort>44363</IISExpressSSLPort>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

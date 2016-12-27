@@ -10,7 +10,9 @@ namespace test
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/Custom/img_render.js"));
+                        "~/Scripts/Custom/img_render.js",
+                        "~/Scripts/Custom/general.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -29,7 +31,19 @@ namespace test
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                        "~/Scripts/Custom/account.js"));
+                        "~/Scripts/Custom/account.js",
+                        "~/Scripts/Custom/landingPage.js"
+                        ));
+
+            bundles.Add(new ScriptBundle("~/bundles/landingPage").Include(
+                        "~/Scripts/Custom/landingPage.js"
+                        ));
+            /*
+            bundles.Add(new ScriptBundle("~/bundles/updatedjquery").Include(
+                        "~/Scripts/Custom/jquery-1.11.3.min.js",
+                        "~/Scripts/Custom/jquery.mobile-1.4.5.min.js"
+                        ));
+                        */
         }
     }
 }

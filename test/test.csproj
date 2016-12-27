@@ -18,7 +18,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -168,6 +169,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ExpressionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataContexts\ApplicationDbContext.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Expression.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
@@ -207,6 +210,8 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom\account.js" />
     <Content Include="Scripts\Custom\img_render.js" />
+    <Content Include="Scripts\Custom\general.js" />
+    <Content Include="Scripts\Custom\landingPage.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -255,10 +260,15 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Home\Page.cshtml" />
+    <Content Include="Views\Account\Privacy.cshtml" />
+    <Content Include="Views\Account\Developers.cshtml" />
+    <Content Include="Views\Home\Privacy.cshtml" />
+    <Content Include="Views\Home\Developers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\" />
+    <Folder Include="Views\Expression\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
